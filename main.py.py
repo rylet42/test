@@ -116,17 +116,17 @@ async def send_grenade_info(callback: CallbackQuery):
     # ==================== ANCIENT ====================
     elif map_name == "ancient":
         if position == "a":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
+            if grenade_type == "smoke": video_id = "BAACAgIAAxkBAAM1aj2Cnbfne6olb7OjoYBf5B7Xxg0AAoaXAAK4qvBJ01FgDiLiGhY8BA"
             elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
             elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
             elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
         elif position == "b":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
+            if grenade_type == "smoke": video_id = "BAACAgIAAxkBAAMzaj2CJR_XtRmks44vhgSrGQqezzgAAoGXAAK4qvBJCKtr-pDnJz08BA"
             elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
             elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
             elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
         elif position == "mid":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
+            if grenade_type == "smoke": video_id = "BAACAgIAAxkBAAM3aj2CoxR1OSqS40AoF7t1MKsuwZgAAoiXAAK4qvBJEJW_x7qO-YM8BA"
             elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
             elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
             elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
