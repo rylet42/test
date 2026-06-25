@@ -252,8 +252,20 @@ async def back_to_positions(callback: CallbackQuery):
     )
 
 
+import os
+from aiohttp import web
+
 async def main():
     print("Бот успешно запущен!")
+    
+    # Создаем пустышку-сервер, чтобы Render увидел открытый порт
+    app = web.Application()
+    runner = web.AppRunner(app)
+    await runner.setup()
+    port = int(os.getenv("PORT", 10000))
+    site = web.TCPSite(runner, "0.0.0.0", port)
+    await site.start()
+
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
 
