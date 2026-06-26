@@ -9,266 +9,165 @@ TOKEN = "8798897292:AAGKc4g4Wh3KwDB9xInl5eLrRDYnBOseLp4"
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
-# --- КЛАВИАТУРЫ (ИНЛАЙН-КНОПКИ) ---
-
-# Главное меню: теперь со всеми картами в два столбца, чтобы красиво выглядело
-maps_kb = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text="Dust 2", callback_data="map_dust2"), InlineKeyboardButton(text="Mirage", callback_data="map_mirage")],
-    [InlineKeyboardButton(text="Ancient", callback_data="map_ancient"), InlineKeyboardButton(text="Inferno", callback_data="map_inferno")],
-    [InlineKeyboardButton(text="Cache", callback_data="map_cache"), InlineKeyboardButton(text="Anubis", callback_data="map_anubis")],
-    [InlineKeyboardButton(text="Overpass", callback_data="map_overpass"), InlineKeyboardButton(text="Nuke", callback_data="map_nuke")]
-])
-
-def get_position_kb(map_name):
-    return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="A Плент", callback_data=f"pos_{map_name}_a")],
-        [InlineKeyboardButton(text="B Плент", callback_data=f"pos_{map_name}_b")],
-        [InlineKeyboardButton(text="Мид (Mid)", callback_data=f"pos_{map_name}_mid")],
-        [InlineKeyboardButton(text="⬅️ Назад к картам", callback_data="back_to_maps")]
-    ])
-
-def get_grenade_kb(map_name, position):
-    return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="💨 Смок", callback_data=f"gren_{map_name}_{position}_smoke"),
-         InlineKeyboardButton(text="🔥 Молотов", callback_data=f"gren_{map_name}_{position}_molotov")],
-        [InlineKeyboardButton(text="✨ Флешка", callback_data=f"gren_{map_name}_{position}_flash"),
-         InlineKeyboardButton(text="💥 ХЕ (Хаешка)", callback_data=f"gren_{map_name}_{position}_he")],
-        [InlineKeyboardButton(text="⬅️ Назад к позициям", callback_data=f"back_to_pos_{map_name}")]
-    ])
-
-
-# --- ХЕНДЛЕРЫ ---
-
 @dp.message(Command("start", "commands"))
 async def commands_command(message: types.Message):
     menu_text = (
         "🗺️ **Список доступних карт і команд:**\n\n"
         "🏜️ **Mirage:**\n"
-        "• /mirage_a_smoke — Смоки на А плент\n"
-        "• /mirage_b_smoke — Смоки на Б плент\n"
+        "• /mirage_a — Раскидка А плента\n"
+        "• /mirage_b — Раскидка Б плента\n"
         "• /mirage_mid — Раскидка мидла\n\n"
         "🌋 **Inferno:**\n"
-        "• /inferno_b_smoke — Раскидка Б плента\n"
-        "• /inferno_mid — Смоки на топ-мид\n\n"
+        "• /inferno_a — Раскидка А плента\n"
+        "• /inferno_b — Раскидка Б плента\n"
+        "• /inferno_mid — Раскидка мидла\n\n"
+        "🏙️ **Overpass:**\n"
+        "• /overpass_a — Раскидка А плента\n"
+        "• /overpass_b — Раскидка Б плента\n"
+        "• /overpass_mid — Раскидка мидла\n\n"
+        "ancient **Ancient:**\n"
+        "• /ancient_a — Раскидка А плента\n"
+        "• /ancient_b — Раскидка Б плента\n"
+        "• /ancient_mid — Раскидка мидла\n\n"
+        "🏛️ **Anubis:**\n"
+        "• /anubis_a — Раскидка А плента\n"
+        "• /anubis_b — Раскидка Б плента\n"
+        "• /anubis_mid — Раскидка мидла\n\n"
+        "🏭 **Nuke:**\n"
+        "• /nuke_a — Раскидка А плента\n"
+        "• /nuke_b — Раскидка Б плента (Б-завод)\n"
+        "• /nuke_mid — Раскидка улицы (Улица/Улица-Мид)\n\n"
+        "🕌 **Dust 2:**\n"
+        "• /dust2_a — Раскидка А плента\n"
+        "• /dust2_b — Раскидка Б плента\n"
+        "• /dust2_mid — Раскидка мидла\n\n"
+        "🟢 **Cache:**\n"
+        "• /cache_a — Раскидка А плента\n"
+        "• /cache_b — Раскидка Б плента\n"
+        "• /cache_mid — Раскидка мидла\n\n"
         "💡 *Просто натисни на синю команду, щоб побачити розкидку!*"
     )
-    
     await message.answer(menu_text, parse_mode="Markdown")
 
-    @dp.message(Command("mirage_b_smoke"))
-async def mirage_b_smoke_cmd(message: types.Message):
-    # Тут бот скидывает видео, гифку или скриншот
-    await message.answer("Вот раскидка смока на Б (Прыжок с тикета):\n[Ссылка на видео или описание]")
+
+# ================= ХЕНДЛЕРИ: MIRAGE =================
+
+@dp.message(Command("mirage_a"))
+async def mirage_a_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Mirage (А плент)")
+
+@dp.message(Command("mirage_b"))
+async def mirage_b_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Mirage (Б плент)")
+
+@dp.message(Command("mirage_mid"))
+async def mirage_mid_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Mirage (Мидл)")
 
 
-# Функция отлова видео для получения ID
-@dp.message(F.video)
-async def get_video_id(message: Message):
-    await message.answer(f"ID твоего видео:\n`{message.video.file_id}`", parse_mode="MarkdownV2")
+# ================= ХЕНДЛЕРИ: INFERNO =================
 
-@dp.callback_query(F.data.startswith("map_"))
-async def select_map(callback: CallbackQuery):
-    map_name = callback.data.split("_")[1]
-    await callback.message.edit_text(
-        text=f"Карта: *{map_name.capitalize()}*\nВыбери часть карты:",
-        reply_markup=get_position_kb(map_name),
-        parse_mode="Markdown"
-    )
+@dp.message(Command("inferno_a"))
+async def inferno_a_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Inferno (А плент)")
 
-@dp.callback_query(F.data.startswith("pos_"))
-async def select_position(callback: CallbackQuery):
-    data = callback.data.split("_")
-    map_name = data[1]
-    position = data[2]
-    
-    await callback.message.edit_text(
-        text=f"Карта: *{map_name.capitalize()}* ➡️ Позиция: *{position.upper()}*\nКакая граната нужна?",
-        reply_markup=get_grenade_kb(map_name, position),
-        parse_mode="Markdown"
-    )
+@dp.message(Command("inferno_b"))
+async def inferno_b_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Inferno (Б плент)")
 
-@dp.callback_query(F.data.startswith("gren_"))
-async def send_grenade_info(callback: CallbackQuery):
-    data = callback.data.split("_")
-    map_name = data[1]       
-    position = data[2]       
-    grenade_type = data[3]   
-    
-    video_id = None
-
-    # ==================== MIRAGE ====================
-    if map_name == "mirage":
-        if position == "a":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "BAACAgIAAxkBAAMfaj1hnVEi1YOGSQpmhrU8q69x7t4AAhmcAAK4quhJvfSP2Et1G608BA"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "b":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "mid":
-            if grenade_type == "smoke": video_id = "BAACAgIAAxkBAAMhaj1htD6svKDisnzOWjHvv4HLlgIAAhqcAAK4quhJWq6JktWJXdU8BA"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-
-    # ==================== DUST 2 ====================
-    elif map_name == "dust2":
-        if position == "a":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "b":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "mid":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-
-    # ==================== ANCIENT ====================
-    elif map_name == "ancient":
-        if position == "a":
-            if grenade_type == "smoke": video_id = "BAACAgIAAxkBAAM1aj2Cnbfne6olb7OjoYBf5B7Xxg0AAoaXAAK4qvBJ01FgDiLiGhY8BA"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "b":
-            if grenade_type == "smoke": video_id = "BAACAgIAAxkBAAMzaj2CJR_XtRmks44vhgSrGQqezzgAAoGXAAK4qvBJCKtr-pDnJz08BA"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "mid":
-            if grenade_type == "smoke": video_id = "BAACAgIAAxkBAAM3aj2CoxR1OSqS40AoF7t1MKsuwZgAAoiXAAK4qvBJEJW_x7qO-YM8BA"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-
-    # ==================== INFERNO ====================
-    elif map_name == "inferno":
-        if position == "a":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "b":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "mid":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-
-    # ==================== CACHE ====================
-    elif map_name == "cache":
-        if position == "a":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "b":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "mid":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-
-    # ==================== ANUBIS ====================
-    elif map_name == "anubis":
-        if position == "a":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "b":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "mid":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-
-    # ==================== OVERPASS ====================
-    elif map_name == "overpass":
-        if position == "a":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "b":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "mid":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-
-    # ==================== NUKE ====================
-    elif map_name == "nuke":
-        if position == "a":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "b":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-        elif position == "mid":
-            if grenade_type == "smoke": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "molotov": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "flash": video_id = "СЮДА_АЙДИ"
-            elif grenade_type == "he": video_id = "СЮДА_АЙДИ"
-
-    # --- ОТПРАВКА ---
-    if video_id and video_id != "СЮДА_АЙДИ":
-        await callback.bot.send_video(
-            chat_id=callback.message.chat.id,
-            video=video_id
-        )
-    else:
-        await callback.message.answer(
-            text=f"🎬 Гайд на *{grenade_type.upper()}* ({position.upper()}) для *{map_name.capitalize()}* еще готовится!",
-            parse_mode="Markdown"
-        )
-        
-    await callback.answer()
+@dp.message(Command("inferno_mid"))
+async def inferno_mid_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Inferno (Мидл)")
 
 
-# КНОПКИ НАЗАД
+# ================= ХЕНДЛЕРИ: OVERPASS =================
 
-@dp.callback_query(F.data == "back_to_maps")
-async def back_to_maps(callback: CallbackQuery):
-    await callback.message.edit_text("Выбери карту для раскидки:", reply_markup=maps_kb)
+@dp.message(Command("overpass_a"))
+async def overpass_a_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Overpass (А плент)")
 
-@dp.callback_query(F.data.startswith("back_to_pos_"))
-async def back_to_positions(callback: CallbackQuery):
-    map_name = callback.data.split("_")[3]
-    await callback.message.edit_text(
-        text=f"Карта: *{map_name.capitalize()}*\nВыбери часть карты:",
-        reply_markup=get_position_kb(map_name),
-        parse_mode="Markdown"
-    )
+@dp.message(Command("overpass_b"))
+async def overpass_b_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Overpass (Б плент)")
+
+@dp.message(Command("overpass_mid"))
+async def overpass_mid_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Overpass (Мидл)")
+
+
+# ================= ХЕНДЛЕРИ: ANCIENT =================
+
+@dp.message(Command("ancient_a"))
+async def ancient_a_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Ancient (А плент)")
+
+@dp.message(Command("ancient_b"))
+async def ancient_b_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Ancient (Б плент)")
+
+@dp.message(Command("ancient_mid"))
+async def ancient_mid_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Ancient (Мидл)")
+
+
+# ================= ХЕНДЛЕРИ: ANUBIS =================
+
+@dp.message(Command("anubis_a"))
+async def anubis_a_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Anubis (А плент)")
+
+@dp.message(Command("anubis_b"))
+async def anubis_b_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Anubis (Б плент)")
+
+@dp.message(Command("anubis_mid"))
+async def anubis_mid_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Anubis (Мидл)")
+
+
+# ================= ХЕНДЛЕРИ: NUKE =================
+
+@dp.message(Command("nuke_a"))
+async def nuke_a_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Nuke (А плент)")
+
+@dp.message(Command("nuke_b"))
+async def nuke_b_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Nuke (Б плент)")
+
+@dp.message(Command("nuke_mid"))
+async def nuke_mid_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Nuke (Улица)")
+
+
+# ================= ХЕНДЛЕРИ: DUST 2 =================
+
+@dp.message(Command("dust2_a"))
+async def dust2_a_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Dust 2 (А плент)")
+
+@dp.message(Command("dust2_b"))
+async def dust2_b_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Dust 2 (Б плент)")
+
+@dp.message(Command("dust2_mid"))
+async def dust2_mid_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Dust 2 (Мидл)")
+
+
+# ================= ХЕНДЛЕРИ: CACHE =================
+
+@dp.message(Command("cache_a"))
+async def cache_a_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Cache (А плент)")
+
+@dp.message(Command("cache_b"))
+async def cache_b_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Cache (Б плент)")
+
+@dp.message(Command("cache_mid"))
+async def cache_mid_cmd(message: types.Message):
+    await message.answer_video(video="ID_ВІДЕО", caption="Вот раскидка на Cache (Мидл)")
 
 
 import asyncio
