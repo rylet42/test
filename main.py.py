@@ -27,6 +27,7 @@ GRENADES_DATA = {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []}
+        "insta": []
     },
     "inferno": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
@@ -92,46 +93,70 @@ def get_maps_keyboard():
 async def start_cmd(message: types.Message):
     await message.answer("👋 Привет! Выбери карту для просмотра раскидок:", reply_markup=get_maps_keyboard())
 
-# ================= ШАГ 2: ВЫБОР ТОЧКИ =================
 @dp.callback_query(F.data.startswith("map_"))
 async def select_position(callback: types.CallbackQuery):
     map_name = callback.data.split("_")[1]
     
-    keyboard = InlineKeyboardMarkup(inline_keyboard=[
+    # Базовые кнопки точек
+    buttons = [
         [InlineKeyboardButton(text="Плент А 🅰️", callback_data=f"pos_{map_name}_a")],
         [InlineKeyboardButton(text="Плент Б 🅱️", callback_data=f"pos_{map_name}_b")],
-        [InlineKeyboardButton(text="Мидл / Улица ↩️", callback_data=f"pos_{map_name}_mid")],
-        [InlineKeyboardButton(text="⬅️ Назад к картам", callback_data="back_maps")]
-    ])
-    await callback.message.edit_text(f"Выбрана карта: **{MAP_NAMES.get(map_name)}**\nТеперь выбери позицию:", parse_mode="Markdown", reply_markup=keyboard)
+        [InlineKeyboardButton(text="Мидл / Улица ↩️", callback_data=f"pos_{map_name}_mid")]
+    ]
+    
+    # Если это НЕ nuke, добавляем Инста-смоки отдельной большой плашкой ниже
+   if map_name != "nuke":
+        buttons.append([InlineKeyboardButton(text="Insta-смоки с респы ⚡", callback_data=f"type_{map_name}_all_insta")])
+        
+    buttons.append([InlineKeyboardButton(text="⬅️ Назад к картам", callback_data="back_maps")])
+    
+    keyboard = InlineKeyboardMarkup(inline_keyboard=buttons)
+    await callback.message.edit_text(
+        f"Выбрана карта: **{MAP_NAMES.get(map_name)}**\nВыбери позицию или тип раскидки:", 
+        parse_mode="Markdown", 
+        reply_markup=keyboard
+    )
 
-# ================= ШАГ 3: ВЫБОР ТИПА ГРАНАТЫ =================
+
+# ================= ШАГ 3: ВЫБОР ТИПА ГРАНАТЫ (ДЛЯ ОБЫЧНЫХ ТОЧЕК) =================
 @dp.callback_query(F.data.startswith("pos_"))
 async def select_grenade_type(callback: types.CallbackQuery):
     _, map_name, pos_name = callback.data.split("_")
     
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="Смок 💨", callback_data=f"type_{map_name}_{pos_name}_smoke"), InlineKeyboardButton(text="Флешка 👁️", callback_data=f"type_{map_name}_{pos_name}_flash")],
-        [InlineKeyboardButton(text="Молотов 🔥", callback_data=f"type_{map_name}_{pos_name}_molotov"), InlineKeyboardButton(text="ХАЕшка 💥", callback_data=f"type_{map_name}_{pos_name}_he")],
+        [InlineKeyboardButton(text="Смок 💨", callback_data=f"type_{map_name}_{pos_name}_smoke"), 
+         InlineKeyboardButton(text="Флешка 👁️", callback_data=f"type_{map_name}_{pos_name}_flash")],
+        [InlineKeyboardButton(text="Молотов 🔥", callback_data=f"type_{map_name}_{pos_name}_molotov"), 
+         InlineKeyboardButton(text="ХАЕшка 💥", callback_data=f"type_{map_name}_{pos_name}_he")],
         [InlineKeyboardButton(text="Моменталка ⚡", callback_data=f"type_{map_name}_{pos_name}_popflash")],
         [InlineKeyboardButton(text="⬅️ Назад к позициям", callback_data=f"map_{map_name}")]
     ])
+    
     await callback.message.edit_text(
         f"Карта: **{MAP_NAMES.get(map_name)}** | Позиция: **{POSITION_NAMES.get(pos_name)}**\nВыбери тип гранаты:", 
-        parse_mode="Markdown", reply_markup=keyboard
+        parse_mode="Markdown", 
+        reply_markup=keyboard
     )
 
-# ================= ШАГ 4: МЕНЮ С ЦИФРАМИ =================
+# ================= ШАГ 4: ПОКАЗ ВАРИАНТОВ ВИДЕО (И ДЛЯ ОБЫЧНЫХ, И ДЛЯ ИНСТА) =================
 @dp.callback_query(F.data.startswith("type_"))
 async def show_grenade_variants(callback: types.CallbackQuery):
     _, map_name, pos_name, gren_type = callback.data.split("_")
     
-    videos = GRENADES_DATA.get(map_name, {}).get(pos_name, {}).get(gren_type, [])
-    
+    # Если это инста, забираем видео из корня карты, иначе — из конкретного плента
+    if gren_type == "insta":
+        videos = GRENADES_DATA.get(map_name, {}).get("insta", [])
+        display_name = "Insta-смоки с респы ⚡"
+        back_target = f"map_{map_name}" # Кнопка назад вернет к выбору позиций карты
+    else:
+        videos = GRENADES_DATA.get(map_name, {}).get(pos_name, {}).get(gren_type, [])
+        display_name = GRENADE_NAMES.get(gren_type, "Граната")
+        back_target = f"pos_{map_name}_{pos_name}" # Кнопка назад вернет к выбору гранат плента
+        
     if not videos:
-        await callback.answer("⚠️ Для этой точки видео еще не загружены!", show_alert=True)
+        await callback.answer("⚠️ Видео еще не загружены!", show_alert=True)
         return
-
+        
     buttons = []
     row = []
     for index, _ in enumerate(videos, start=1):
@@ -139,15 +164,16 @@ async def show_grenade_variants(callback: types.CallbackQuery):
         if len(row) == 2:
             buttons.append(row)
             row = []
-    if row:
+    if row: 
         buttons.append(row)
         
-    buttons.append([InlineKeyboardButton(text="⬅️ Назад к гранатам", callback_data=f"pos_{map_name}_{pos_name}")])
-    
+    buttons.append([InlineKeyboardButton(text="⬅️ Назад", callback_data=back_target)])
     keyboard = InlineKeyboardMarkup(inline_keyboard=buttons)
+    
     await callback.message.edit_text(
-        f"Карта: **{MAP_NAMES.get(map_name)}**\nПозиция: **{POSITION_NAMES.get(pos_name)}**\nТип: **{GRENADE_NAMES.get(gren_type)}**\n\nВыбери номер раскидки:",
-        parse_mode="Markdown", reply_markup=keyboard
+        f"Карта: **{MAP_NAMES.get(map_name)}**\nТип: **{display_name}**\n\nВыбери номер раскидки:", 
+        parse_mode="Markdown", 
+        keyboard=keyboard
     )
 
 # ================= ШАГ 5: ОТПРАВКА ВИДЕО =================
