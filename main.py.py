@@ -173,7 +173,7 @@ async def show_grenade_variants(callback: types.CallbackQuery):
     await callback.message.edit_text(
         f"Карта: **{MAP_NAMES.get(map_name)}**\nТип: **{display_name}**\n\nВыбери номер раскидки:", 
         parse_mode="Markdown", 
-        keyboard=keyboard
+        reply_markup=keyboard
     )
 
 # ================= ШАГ 5: ОТПРАВКА ВИДЕО =================
