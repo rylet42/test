@@ -28,9 +28,9 @@ GRENADES_DATA = {
         "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []}
     },
     "ancient": {
-        "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []}
+        "a": {"smoke": [BAACAgIAAxkBAAN_aj6AwjSygzzAXgYEC5egMQpgScAAAiCiAAP9-EmKCZ2dGQAB4Ds8BA], "flash": [], "molotov": [], "he": [], "popflash": []},
+        "b": {"smoke": [BAACAgIAAxkBAAMEaj6Ho3ghPWxXRQo-iEQweJ8VQ2cAAh6eAAIxuvlJoRXgayF3y1M8BA], "flash": [], "molotov": [], "he": [], "popflash": []},
+        "mid": {"smoke": [BAACAgIAAxkBAAMGaj6P4rmhMZrkpR4vZHozGXOeuKQAAo-eAAIxuvlJn8NUQrCj7Og8BA], "flash": [], "molotov": [], "he": [], "popflash": []}
     },
     "anubis": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
