@@ -11,6 +11,15 @@ TOKEN = "8798897292:AAEYTvCge56ry1UPFDHW9QLBXM7gofQ9y60"
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
+# ХЕНДЛЕРЫ
+@dp.message(Command("start"))
+async def start_cmd(message: types.Message):
+    await message.answer("👋 Привет! Бот успешно запущен.\n\nВведите команду /menu, чтобы открыть меню выбора карт.")
+
+@dp.message(Command("menu"))
+async def menu_cmd(message: types.Message):
+    await message.answer("Выбери карту для просмотра раскидок:", reply_markup=get_maps_keyboard())
+
 # ================= БАЗА ДАННЫХ ВСЕХ КАРТ =================
 # Просто вставляй ID видео внутрь скобок [], например: ["ID_1", "ID_2"]
 GRENADES_DATA = {
