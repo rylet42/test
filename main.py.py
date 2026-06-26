@@ -105,7 +105,7 @@ async def select_position(callback: types.CallbackQuery):
     ]
     
     # Если это НЕ nuke, добавляем Инста-смоки отдельной большой плашкой ниже
-       if map_name != "nuke":
+    if map_name != "nuke":
         buttons.append([InlineKeyboardButton(text="Insta-смоки с респы ⚡", callback_data=f"type_{map_name}_all_insta")])
         
     buttons.append([InlineKeyboardButton(text="⬅️ Назад к картам", callback_data="back_maps")])
