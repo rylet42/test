@@ -45,7 +45,26 @@ async def start_command(message: types.Message):
 
 @dp.message(Command("menu"))
 async def menu_command(message: types.Message):
-    await message.answer("Выбери карту для раскидки:", reply_markup=maps_kb)
+    menu_text = (
+        "🗺️ **Список доступных карт и команд:**\n\n"
+        "🏜️ **Mirage:**\n"
+        "• /mirage_a_smoke — Смоки на А плент\n"
+        "• /mirage_b_smoke — Смоки на Б плент\n"
+        "• /mirage_mid — Раскидка мидла\n\n"
+        "🌋 **Inferno:**\n"
+        "• /inferno_b_smoke — Раскидка Б плента\n"
+        "• /inferno_mid — Смоки на топ-мид\n\n"
+        "💡 *Просто нажми на синюю команду, чтобы увидеть раскидку!*"
+    )
+
+    @dp.message(Command("mirage_b_smoke"))
+async def mirage_b_smoke_cmd(message: types.Message):
+    # Тут бот скидывает видео, гифку или скриншот
+    await message.answer("Вот раскидка смока на Б (Прыжок с тикета):\n[Ссылка на видео или описание]")
+    
+    # Отправляем просто текст, без всяких reply_markup
+    await message.answer(menu_text, parse_mode="Markdown")
+    
 # Функция отлова видео для получения ID
 @dp.message(F.video)
 async def get_video_id(message: Message):
