@@ -39,14 +39,10 @@ def get_grenade_kb(map_name, position):
 
 # --- ХЕНДЛЕРЫ ---
 
-@dp.message(Command("start"))
-async def start_command(message: types.Message):
-    await message.answer("Привіт! Бот успішно запущений. Напиши /menu, щоб відкрити головне меню.")
-
-@dp.message(Command("menu"))
-async def menu_command(message: types.Message):
+@dp.message(Command("start", "commands"))
+async def commands_command(message: types.Message):
     menu_text = (
-        "🗺️ **Список доступных карт и команд:**\n\n"
+        "🗺️ **Список доступних карт і команд:**\n\n"
         "🏜️ **Mirage:**\n"
         "• /mirage_a_smoke — Смоки на А плент\n"
         "• /mirage_b_smoke — Смоки на Б плент\n"
@@ -54,17 +50,17 @@ async def menu_command(message: types.Message):
         "🌋 **Inferno:**\n"
         "• /inferno_b_smoke — Раскидка Б плента\n"
         "• /inferno_mid — Смоки на топ-мид\n\n"
-        "💡 *Просто нажми на синюю команду, чтобы увидеть раскидку!*"
+        "💡 *Просто натисни на синю команду, щоб побачити розкидку!*"
     )
+    
+    await message.answer(menu_text, parse_mode="Markdown")
 
     @dp.message(Command("mirage_b_smoke"))
 async def mirage_b_smoke_cmd(message: types.Message):
     # Тут бот скидывает видео, гифку или скриншот
     await message.answer("Вот раскидка смока на Б (Прыжок с тикета):\n[Ссылка на видео или описание]")
-    
-    # Отправляем просто текст, без всяких reply_markup
-    await message.answer(menu_text, parse_mode="Markdown")
-    
+
+
 # Функция отлова видео для получения ID
 @dp.message(F.video)
 async def get_video_id(message: Message):
