@@ -43,7 +43,7 @@ GRENADES_DATA = {
         "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []} # Для Nuke это улица
     },
     "dust2": {
-        "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
+        "a": {"smoke": [], "flash": [], "molotov": [BAACAgIAAxkBAAMIaj6RevB5dNr_9YJ94rdGRjrNK9oAApSeAAIxuvlJk267PLK_q2I8BA], "he": [], "popflash": []},
         "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []}
     },
