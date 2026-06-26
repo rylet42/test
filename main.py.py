@@ -2,6 +2,7 @@ import asyncio
 from aiogram import Bot, Dispatcher, F
 from aiogram.types import Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
+from aiogram.types import BotCommand
 
 TOKEN = "8798897292:AAGKc4g4Wh3KwDB9xInl5eLrRDYnBOseLp4"
 
@@ -267,12 +268,18 @@ async def main():
     site = web.TCPSite(runner, "0.0.0.0", port)
     await site.start()
 
-    # 2. Жёстко сбрасываем все прошлые зависшие подключения к Telegram
-    await bot.session.close() # Закрываем старую сессию, если она была
-    await asyncio.sleep(1)    # Даем Telegram секунду прийти в себя
-    await bot.delete_webhook(drop_pending_updates=True) # Удаляем конфликты
+    # 2. Добавляем команду /start в кнопку Меню
+    commands = [
+        BotCommand(command="start", description="Главное меню / Запустить бота")
+    ]
+    await bot.set_my_commands(commands)
 
-    # 3. Запускаем чистый подлинг
+    # 3. Жёстко сбрасываем все прошлые зависшие подключения
+    await bot.session.close()
+    await asyncio.sleep(1)
+    await bot.delete_webhook(drop_pending_updates=True)
+
+    # 4. Запускаем чистый поллинг
     try:
         await dp.start_polling(bot)
     finally:
