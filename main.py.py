@@ -9,10 +9,12 @@ TOKEN = "8798897292:AAGKc4g4Wh3KwDB9xInl5eLrRDYnBOseLp4"
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
+# ================= МЕНЮ С КОМАНДАМИ =================
+
 @dp.message(Command("start", "commands"))
 async def commands_command(message: types.Message):
     menu_text = (
-        "🗺️ **Список доступних карт і команд:**\n\n"
+        "🗺️ **Список доступных карт и команд:**\n\n"
         "🏜️ **Mirage:**\n"
         "• /mirage_a — Раскидка А плента\n"
         "• /mirage_b — Раскидка Б плента\n"
@@ -25,7 +27,7 @@ async def commands_command(message: types.Message):
         "• /overpass_a — Раскидка А плента\n"
         "• /overpass_b — Раскидка Б плента\n"
         "• /overpass_mid — Раскидка мидла\n\n"
-        "ancient **Ancient:**\n"
+        "🌴 **Ancient:**\n"
         "• /ancient_a — Раскидка А плента\n"
         "• /ancient_b — Раскидка Б плента\n"
         "• /ancient_mid — Раскидка мидла\n\n"
@@ -45,134 +47,129 @@ async def commands_command(message: types.Message):
         "• /cache_a — Раскидка А плента\n"
         "• /cache_b — Раскидка Б плента\n"
         "• /cache_mid — Раскидка мидла\n\n"
-        "💡 *Просто натисни на синю команду, щоб побачити розкидку!*"
+        "💡 *Просто нажми на синюю команду, чтобы увидеть раскидку!*"
     )
     await message.answer(menu_text, parse_mode="Markdown")
 
 
-# ================= ХЕНДЛЕРИ: MIRAGE =================
+# ================= ХЕНДЛЕРЫ: MIRAGE =================
 
 @dp.message(Command("mirage_a"))
 async def mirage_a_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Mirage (А плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Mirage (А плент)")
 
 @dp.message(Command("mirage_b"))
 async def mirage_b_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Mirage (Б плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Mirage (Б плент)")
 
 @dp.message(Command("mirage_mid"))
 async def mirage_mid_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Mirage (Мидл)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Mirage (Мидл)")
 
 
-# ================= ХЕНДЛЕРИ: INFERNO =================
+# ================= ХЕНДЛЕРЫ: INFERNO =================
 
 @dp.message(Command("inferno_a"))
 async def inferno_a_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Inferno (А плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Inferno (А плент)")
 
 @dp.message(Command("inferno_b"))
 async def inferno_b_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Inferno (Б плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Inferno (Б плент)")
 
 @dp.message(Command("inferno_mid"))
 async def inferno_mid_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Inferno (Мидл)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Inferno (Мидл)")
 
 
-# ================= ХЕНДЛЕРИ: OVERPASS =================
+# ================= ХЕНДЛЕРЫ: OVERPASS =================
 
 @dp.message(Command("overpass_a"))
 async def overpass_a_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Overpass (А плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Overpass (А плент)")
 
 @dp.message(Command("overpass_b"))
 async def overpass_b_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Overpass (Б плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Overpass (Б плент)")
 
 @dp.message(Command("overpass_mid"))
 async def overpass_mid_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Overpass (Мидл)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Overpass (Мидл)")
 
 
-# ================= ХЕНДЛЕРИ: ANCIENT =================
+# ================= ХЕНДЛЕРЫ: ANCIENT =================
 
 @dp.message(Command("ancient_a"))
 async def ancient_a_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Ancient (А плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Ancient (А плент)")
 
 @dp.message(Command("ancient_b"))
 async def ancient_b_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Ancient (Б плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Ancient (Б плент)")
 
 @dp.message(Command("ancient_mid"))
 async def ancient_mid_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Ancient (Мидл)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Ancient (Мидл)")
 
 
-# ================= ХЕНДЛЕРИ: ANUBIS =================
+# ================= ХЕНДЛЕРЫ: ANUBIS =================
 
 @dp.message(Command("anubis_a"))
 async def anubis_a_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Anubis (А плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Anubis (А плент)")
 
 @dp.message(Command("anubis_b"))
 async def anubis_b_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Anubis (Б плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Anubis (Б плент)")
 
 @dp.message(Command("anubis_mid"))
 async def anubis_mid_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Anubis (Мидл)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Anubis (Мидл)")
 
 
-# ================= ХЕНДЛЕРИ: NUKE =================
+# ================= ХЕНДЛЕРЫ: NUKE =================
 
 @dp.message(Command("nuke_a"))
 async def nuke_a_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Nuke (А плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Nuke (А плент)")
 
 @dp.message(Command("nuke_b"))
 async def nuke_b_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Nuke (Б плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Nuke (Б плент)")
 
 @dp.message(Command("nuke_mid"))
 async def nuke_mid_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Nuke (Улица)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Nuke (Улица)")
 
 
-# ================= ХЕНДЛЕРИ: DUST 2 =================
+# ================= ХЕНДЛЕРЫ: DUST 2 =================
 
 @dp.message(Command("dust2_a"))
 async def dust2_a_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Dust 2 (А плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Dust 2 (А плент)")
 
 @dp.message(Command("dust2_b"))
 async def dust2_b_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Dust 2 (Б плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Dust 2 (Б плент)")
 
 @dp.message(Command("dust2_mid"))
 async def dust2_mid_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Dust 2 (Мидл)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Dust 2 (Мидл)")
 
 
-# ================= ХЕНДЛЕРИ: CACHE =================
+# ================= ХЕНДЛЕРЫ: CACHE =================
 
 @dp.message(Command("cache_a"))
 async def cache_a_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Cache (А плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Cache (А плент)")
 
 @dp.message(Command("cache_b"))
 async def cache_b_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Cache (Б плент)")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Cache (Б плент)")
 
 @dp.message(Command("cache_mid"))
 async def cache_mid_cmd(message: types.Message):
-    await message.answer_video(video="ВСТАВ_СЮДИ_АЙДІ", caption="Вот раскидка на Cache (Мидл)")
-
-# Хендлер, який ловить надіслані відео та повертає їх ID
-@dp.message(F.video)
-async def get_video_id(message: types.Message):
-    await message.answer(f"Твій ID відео:\n` {message.video.file_id} `", parse_mode="Markdown")
+    await message.answer_video(video="ВСТАВЬ_СЮДА_АЙДИ", caption="Вот раскидка на Cache (Мидл)")
     
 
 import asyncio
