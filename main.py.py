@@ -39,10 +39,13 @@ def get_grenade_kb(map_name, position):
 
 # --- ХЕНДЛЕРЫ ---
 
-@dp.message(Command("start", "menu"))
-async def cmd_start(message: Message):
-    await message.answer("Выбери карту для раскидки:", reply_markup=maps_kb)
+@dp.message(Command("start"))
+async def start_command(message: types.Message):
+    await message.answer("Привіт! Бот успішно запущений. Напиши /menu, щоб відкрити головне меню.")
 
+@dp.message(Command("menu"))
+async def menu_command(message: types.Message):
+    await message.answer("Выбери карту для раскидки:", reply_markup=maps_kb)
 # Функция отлова видео для получения ID
 @dp.message(F.video)
 async def get_video_id(message: Message):
