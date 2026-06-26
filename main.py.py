@@ -2,6 +2,8 @@ import asyncio
 from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+import os
+from aiohttp import web
 
 # Вставь сюда токен своего основного бота
 TOKEN = "8798897292:AAEYTvCge56ry1UPFDHW9QLBXM7gofQ9y60"
@@ -161,8 +163,24 @@ async def send_grenade_video(callback: types.CallbackQuery):
 async def back_to_maps(callback: types.CallbackQuery):
     await callback.message.edit_text("Выбери карту для просмотра раскидок:", reply_markup=get_maps_keyboard())
 
-# Запуск бота
+# ================= КОД ДЛЯ ОБМАНА RENDER (ВЕБ-СЕРВЕР) =================
+async def handle_root(request):
+    return web.Response(text="Бот работает!")
+
+async def start_webserver():
+    app = web.Application()
+    app.router.add_get('/', handle_root)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    port = int(os.environ.get("PORT", 10000))
+    site = web.TCPSite(runner, '0.0.0.0', port)
+    await site.start()
+    print(f"Микро-сервер запущен на порту {port}")
+
 async def main():
+    # Вот эту строчку добавляем:
+    await start_webserver()
+    
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
