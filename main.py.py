@@ -3,7 +3,7 @@ from aiogram import Bot, Dispatcher, F
 from aiogram.types import Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
 
-TOKEN = "8798897292:AAES4JVA4jsCrfl9a7sG6R52YX1udXpRmwk"
+TOKEN = "8798897292:AAGKc4g4Wh3KwDB9xInl5eLrRDYnBOseLp4"
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
@@ -252,13 +252,14 @@ async def back_to_positions(callback: CallbackQuery):
     )
 
 
+import asyncio
 import os
 from aiohttp import web
 
 async def main():
     print("Бот успешно запущен!")
     
-    # Создаем пустышку-сервер, чтобы Render увидел открытый порт
+    # 1. Запускаем пустышку-сервер для Render
     app = web.Application()
     runner = web.AppRunner(app)
     await runner.setup()
@@ -266,8 +267,16 @@ async def main():
     site = web.TCPSite(runner, "0.0.0.0", port)
     await site.start()
 
-    await bot.delete_webhook(drop_pending_updates=True)
-    await dp.start_polling(bot)
+    # 2. Жёстко сбрасываем все прошлые зависшие подключения к Telegram
+    await bot.session.close() # Закрываем старую сессию, если она была
+    await asyncio.sleep(1)    # Даем Telegram секунду прийти в себя
+    await bot.delete_webhook(drop_pending_updates=True) # Удаляем конфликты
+
+    # 3. Запускаем чистый подлинг
+    try:
+        await dp.start_polling(bot)
+    finally:
+        await bot.session.close()
 
 if __name__ == "__main__":
     asyncio.run(main())
