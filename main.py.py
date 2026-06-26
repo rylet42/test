@@ -26,7 +26,7 @@ GRENADES_DATA = {
     "mirage": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []}
+        "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "insta": []
     },
     "inferno": {
