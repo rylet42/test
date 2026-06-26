@@ -39,7 +39,7 @@ def get_grenade_kb(map_name, position):
 
 # --- ХЕНДЛЕРЫ ---
 
-@dp.message(commands=["start", "menu"])
+@dp.message(Command("start", "menu"))
 async def cmd_start(message: Message):
     await message.answer("Выбери карту для раскидки:", reply_markup=maps_kb)
 
