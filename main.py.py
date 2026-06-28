@@ -226,3 +226,8 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
+# ВРЕМЕННЫЙ ХЕНДЛЕР: выдает правильный ID для этого бота
+@dp.message(F.video)
+async def get_video_id(message: types.Message):
+    await message.answer(f"Вот правильный ID файла для этого бота:\n\n`{message.video.file_id}`", parse_mode="Markdown")
