@@ -67,7 +67,7 @@ GRENADES_DATA = {
         "a": {"smoke": ["BAACAgIAAxkBAAPLakD0mAs16najBG9XsIKrNIQAAdIMAAKMkQACMDkJSppEXyqdyZy2PAQ"], "flash": [], "molotov": ["BAACAgIAAxkBAAPCakDx5D6gvCicAAFq9jhMjMpHbwphAAJ6kQACMDkJSr3DjSZRIxNEPAQ"], "he": [], "popflash": []},
         "b": {"smoke": ["BAACAgIAAxkBAAPHakDzCDzuHQofoGGhNmyGAAHleP3PAAKEkQACMDkJSgcYG2pPHAL3PAQ"], "flash": [], "molotov": [], "he": [], "popflash": []},
         "mid": {"smoke": ["BAACAgIAAxkBAAPJakD0h7ghSdY5ScFlUNT0y7p_ZkIAAoqRAAIwOQlK8aF8m-Oh17U8BA"], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "insta": {"smoke": ["BAACAgIAAxkBAAPNakD0rxdnFhsPQsFyYTDsKu7GahMAAo6RAAIwOQlKnlGc4E04XmU8BA"]
+        "insta": {"smoke": ["BAACAgIAAxkBAAPNakD0rxdnFhsPQsFyYTDsKu7GahMAAo6RAAIwOQlKnlGc4E04XmU8BA"]}
     },
     "cache": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
