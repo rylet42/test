@@ -31,7 +31,7 @@ GRENADES_DATA = {
     "mirage": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
+        "mid": {"smoke": ["BAACAgIAAxkBAAPPakD2Puf2R601D4KoP2m5WdPMQHwAAqSRAAIwOQlKnxSdbv5AmI48BA"], "flash": [], "molotov": [], "he": [], "popflash": []},
         "insta": []
     },
     "inferno": {
@@ -64,10 +64,10 @@ GRENADES_DATA = {
         "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []} # Для Nuke это улица
     },
     "dust2": {
-        "a": {"smoke": [], "flash": [], "molotov": ["BAACAgIAAxkBAAPCakDx5D6gvCicAAFq9jhMjMpHbwphAAJ6kQACMDkJSr3DjSZRIxNEPAQ"], "he": [], "popflash": []},
-        "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "insta": []
+        "a": {"smoke": ["BAACAgIAAxkBAAPLakD0mAs16najBG9XsIKrNIQAAdIMAAKMkQACMDkJSppEXyqdyZy2PAQ"], "flash": [], "molotov": ["BAACAgIAAxkBAAPCakDx5D6gvCicAAFq9jhMjMpHbwphAAJ6kQACMDkJSr3DjSZRIxNEPAQ"], "he": [], "popflash": []},
+        "b": {"smoke": ["BAACAgIAAxkBAAPHakDzCDzuHQofoGGhNmyGAAHleP3PAAKEkQACMDkJSgcYG2pPHAL3PAQ"], "flash": [], "molotov": [], "he": [], "popflash": []},
+        "mid": {"smoke": ["BAACAgIAAxkBAAPJakD0h7ghSdY5ScFlUNT0y7p_ZkIAAoqRAAIwOQlK8aF8m-Oh17U8BA"], "flash": [], "molotov": [], "he": [], "popflash": []},
+        "insta": ["BAACAgIAAxkBAAPNakD0rxdnFhsPQsFyYTDsKu7GahMAAo6RAAIwOQlKnlGc4E04XmU8BA"]
     },
     "cache": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
