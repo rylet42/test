@@ -48,9 +48,9 @@ GRENADES_DATA = {
     },
     "ancient": {
         "a": {"smoke": ["BAACAgIAAxkBAAN_aj6AwjSygzzAXgYEC5egMQpgScAAAiCiAAP9-EmKCZ2dGQAB4Ds8BA"], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "b": {"smoke": ["BAACAgIAAxkBAAMEaj6Ho3ghPWxXRQo-iEQweJ8VQ2cAAh6eAAIxuvlJoRXgayF3y1M8BA"], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "mid": {"smoke": ["BAACAgIAAxkBAAMGaj6P4rmhMZrkpR4vZHozGXOeuKQAAo-eAAIxuvlJn8NUQrCj7Og8BA"], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "insta": []
+        "b": {"smoke": ["BAACAgIAAxkBAAPAakDxsTXTEKcE2yF3sUVrZRhgSH4AAniRAAIwOQlKN9HbSupveMA8BA"], "flash": [], "molotov": [], "he": [], "popflash": []},
+        "mid": {"smoke": [""], "flash": [], "molotov": [], "he": [], "popflash": []},
+        "insta": ["BAACAgIAAxkBAAO-akDxaro4wZmIri9vWdBnhh1kS1oAAnaRAAIwOQlKlDQ_D6M6u1w8BA"]
     },
     "anubis": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
@@ -64,7 +64,7 @@ GRENADES_DATA = {
         "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []} # Для Nuke это улица
     },
     "dust2": {
-        "a": {"smoke": [], "flash": [], "molotov": ["BAACAgIAAxkBAAMIaj6RevB5dNr_9YJ94rdGRjrNK9oAApSeAAIxuvlJk267PLK_q2I8BA"], "he": [], "popflash": []},
+        "a": {"smoke": [], "flash": [], "molotov": ["BAACAgIAAxkBAAPCakDx5D6gvCicAAFq9jhMjMpHbwphAAJ6kQACMDkJSr3DjSZRIxNEPAQ"], "he": [], "popflash": []},
         "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "insta": []
