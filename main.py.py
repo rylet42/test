@@ -32,31 +32,31 @@ GRENADES_DATA = {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "mid": {"smoke": ["BAACAgIAAxkBAAPPakD2Puf2R601D4KoP2m5WdPMQHwAAqSRAAIwOQlKnxSdbv5AmI48BA"], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "insta": { "smoke": []
+        "insta": { "smoke": []}
     },
     "inferno": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "insta": { "smoke": []
+        "insta": { "smoke": []}
     },
     "overpass": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "insta": { "smoke": []
+        "insta": { "smoke": []}
     },
     "ancient": {
         "a": {"smoke": ["BAACAgIAAxkBAAN_aj6AwjSygzzAXgYEC5egMQpgScAAAiCiAAP9-EmKCZ2dGQAB4Ds8BA"], "flash": [], "molotov": [], "he": [], "popflash": []},
         "b": {"smoke": ["BAACAgIAAxkBAAPAakDxsTXTEKcE2yF3sUVrZRhgSH4AAniRAAIwOQlKN9HbSupveMA8BA"], "flash": [], "molotov": [], "he": [], "popflash": []},
         "mid": {"smoke": [""], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "insta": {"smoke": ["BAACAgIAAxkBAAO-akDxaro4wZmIri9vWdBnhh1kS1oAAnaRAAIwOQlKlDQ_D6M6u1w8BA"]
+        "insta": {"smoke": ["BAACAgIAAxkBAAO-akDxaro4wZmIri9vWdBnhh1kS1oAAnaRAAIwOQlKlDQ_D6M6u1w8BA"]}
     },
     "anubis": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "insta": { "smoke": []
+        "insta": { "smoke": []}
     },
     "nuke": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
@@ -73,7 +73,7 @@ GRENADES_DATA = {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
-       "insta": { "smoke": []
+       "insta": { "smoke": []}
     }
 }
 
