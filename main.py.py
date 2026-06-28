@@ -224,18 +224,19 @@ async def start_webserver():
     print(f"Микро-сервер запущен на порту {port}")
 
 async def main():
-    # Вот эту строчку добавляем:
-    await start_webserver()
-    
-    await dp.start_polling(bot)
-    
-async def main():
     # Запускаем фоновую задачу-будильник (keep_alive)
     asyncio.create_task(keep_alive())
     
     # skip_updates=True сбрасывает все старые сообщения при перезапуске, убирая конфликты
     await dp.start_polling(bot, skip_updates=True)
 
+
+async def main():
+    # Вот эту строчку добавляем:
+    await start_webserver()
+    
+    await dp.start_polling(bot)
+    
 if __name__ == "__main__":
     asyncio.run(main())
 
