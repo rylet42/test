@@ -228,6 +228,13 @@ async def main():
     await start_webserver()
     
     await dp.start_polling(bot)
+    
+async def main():
+    # Запускаем фоновую задачу-будильник (keep_alive)
+    asyncio.create_task(keep_alive())
+    
+    # skip_updates=True сбрасывает все старые сообщения при перезапуске, убирая конфликты
+    await dp.start_polling(bot, skip_updates=True)
 
 if __name__ == "__main__":
     asyncio.run(main())
