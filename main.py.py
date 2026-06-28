@@ -32,22 +32,26 @@ GRENADES_DATA = {
     "inferno": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []}
+        "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
+        "insta": []
     },
     "overpass": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []}
+        "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
+        "insta": []
     },
     "ancient": {
         "a": {"smoke": ["BAACAgIAAxkBAAN_aj6AwjSygzzAXgYEC5egMQpgScAAAiCiAAP9-EmKCZ2dGQAB4Ds8BA"], "flash": [], "molotov": [], "he": [], "popflash": []},
         "b": {"smoke": ["BAACAgIAAxkBAAMEaj6Ho3ghPWxXRQo-iEQweJ8VQ2cAAh6eAAIxuvlJoRXgayF3y1M8BA"], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "mid": {"smoke": ["BAACAgIAAxkBAAMGaj6P4rmhMZrkpR4vZHozGXOeuKQAAo-eAAIxuvlJn8NUQrCj7Og8BA"], "flash": [], "molotov": [], "he": [], "popflash": []}
+        "mid": {"smoke": ["BAACAgIAAxkBAAMGaj6P4rmhMZrkpR4vZHozGXOeuKQAAo-eAAIxuvlJn8NUQrCj7Og8BA"], "flash": [], "molotov": [], "he": [], "popflash": []},
+        "insta": []
     },
     "anubis": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []}
+        "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
+        "insta": []
     },
     "nuke": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
@@ -57,12 +61,14 @@ GRENADES_DATA = {
     "dust2": {
         "a": {"smoke": [], "flash": [], "molotov": ["BAACAgIAAxkBAAMIaj6RevB5dNr_9YJ94rdGRjrNK9oAApSeAAIxuvlJk267PLK_q2I8BA"], "he": [], "popflash": []},
         "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []}
+        "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
+        "insta": []
     },
     "cache": {
         "a": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
         "b": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
-        "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []}
+        "mid": {"smoke": [], "flash": [], "molotov": [], "he": [], "popflash": []},
+        "insta": []
     }
 }
 
