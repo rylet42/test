@@ -193,7 +193,15 @@ async def send_grenade_video(callback: types.CallbackQuery):
     _, map_name, pos_name, gren_type, video_index = callback.data.split("_")
     video_index = int(video_index)
     
-    videos = GRENADES_DATA.get(map_name, {}).get(pos_name, {}).get(gren_type, [])
+    if gren_type == "insta" or pos_name == "insta":
+        # Пробуем достать из новой структуры {"insta": {"smoke": [...]}}
+        videos = GRENADES_DATA.get(map_name, {}).get("insta", {}).get("smoke", [])
+        if not videos:
+            # Если там пусто, подстрахуемся и проверим старую структуру ["file_id"]
+            videos = GRENADES_DATA.get(map_name, {}).get("insta", [])
+    else:
+        # Для всех остальных позиций (A, B, Mid) оставляем старую логику
+        videos = GRENADES_DATA.get(map_name, {}).get(pos_name, {}).get(gren_type, [])
     
     if video_index < len(videos):
         video_id = videos[video_index]
