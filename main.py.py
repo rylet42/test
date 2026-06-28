@@ -11,6 +11,11 @@ TOKEN = "8798897292:AAEYTvCge56ry1UPFDHW9QLBXM7gofQ9y60"
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
+# ВРЕМЕННЫЙ ХЕНДЛЕР: выдает правильный ID для этого бота
+@dp.message(F.video)
+async def get_video_id(message: types.Message):
+    await message.answer(f"Вот правильный ID файла для этого бота:\n\n`{message.video.file_id}`", parse_mode="Markdown")
+
 # ХЕНДЛЕРЫ
 @dp.message(Command("start"))
 async def start_cmd(message: types.Message):
@@ -227,7 +232,4 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 
-# ВРЕМЕННЫЙ ХЕНДЛЕР: выдает правильный ID для этого бота
-@dp.message(F.video)
-async def get_video_id(message: types.Message):
-    await message.answer(f"Вот правильный ID файла для этого бота:\n\n`{message.video.file_id}`", parse_mode="Markdown")
+
